@@ -60,4 +60,13 @@ class EqualsAndHashCodeApplicationTests {
         Dog proxy = dogRepository.getReferenceById(1L);
         Assertions.assertEquals(entity, proxy);
     }
+
+    @Sql(scripts = "compareTwoProxies/insert-dog.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(scripts = "compareTwoProxies/delete-dog.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    @Test
+    public void compareTwoProxiesTest() {
+        Dog proxy1 = dogRepository.getReferenceById(1L);
+        Dog proxy2 = dogRepository.getReferenceById(1L);
+        Assertions.assertEquals(proxy1, proxy2);
+    }
 }
