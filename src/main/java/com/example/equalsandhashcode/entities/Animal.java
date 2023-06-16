@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.proxy.HibernateProxy;
 
+import java.util.Objects;
+
 @Getter
 @Setter
 @MappedSuperclass
@@ -23,7 +25,7 @@ public class Animal {
         Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
         if (thisEffectiveClass != oEffectiveClass) return false;
         Animal other = (Animal) o;
-        return id != null && id.equals(other.getId());
+        return getId() != null && Objects.equals(getId(), other.getId());
     }
 
     @Override
