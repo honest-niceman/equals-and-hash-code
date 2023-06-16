@@ -3,6 +3,7 @@ package com.example.equalsandhashcode.entities;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.Hibernate;
 
 @Getter
 @Setter
@@ -17,8 +18,7 @@ public class Animal {
     @Override
     public final boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null) return false;
-        if (getClass() != o.getClass()) return false;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         Animal other = (Animal) o;
         return id != null && id.equals(other.getId());
     }
