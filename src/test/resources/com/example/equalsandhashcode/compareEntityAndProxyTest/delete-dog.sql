@@ -1,0 +1,1 @@
+delete from dog where id=1;

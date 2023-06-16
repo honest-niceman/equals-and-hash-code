@@ -4,6 +4,7 @@ import com.example.equalsandhashcode.entities.Cat;
 import com.example.equalsandhashcode.entities.Dog;
 import com.example.equalsandhashcode.repositories.CatRepository;
 import com.example.equalsandhashcode.repositories.DogRepository;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +21,6 @@ class EqualsAndHashCodeApplicationTests {
     private DogRepository dogRepository;
     @Autowired
     private CatRepository catRepository;
-
-    @Test
-    void contextLoads() {
-    }
 
     @Sql(scripts = "differentEntitiesTest/insert-dog-and-cat.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Sql(scripts = "differentEntitiesTest/delete-dog-and-cat.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
@@ -52,5 +49,15 @@ class EqualsAndHashCodeApplicationTests {
         Set<Dog> dogs = new HashSet<>();
         dogs.add(proxyDog1);
         dogs.add(proxyDog2);
+    }
+
+    @Sql(scripts = "compareEntityAndProxyTest/insert-dog.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(scripts = "compareEntityAndProxyTest/delete-dog.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    @Transactional
+    @Test
+    public void compareEntityAndProxyTest() {
+        Dog entity = dogRepository.findById(1L).orElseThrow();
+        Dog proxy = dogRepository.getReferenceById(1L);
+        Assertions.assertEquals(entity, proxy);
     }
 }

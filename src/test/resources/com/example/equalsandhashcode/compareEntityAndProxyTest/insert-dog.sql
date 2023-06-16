@@ -1,0 +1,1 @@
+insert into dog (id) values (1);
