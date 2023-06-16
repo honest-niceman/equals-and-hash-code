@@ -24,7 +24,7 @@ public class Animal {
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         return getClass().hashCode();
     }
 }
