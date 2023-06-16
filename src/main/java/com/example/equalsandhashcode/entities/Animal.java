@@ -17,7 +17,9 @@ public class Animal {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Animal other)) return false;
+        if (o == null) return false;
+        if (getClass() != o.getClass()) return false;
+        Animal other = (Animal) o;
         return id != null && id.equals(other.getId());
     }
 
