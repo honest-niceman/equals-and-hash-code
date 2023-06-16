@@ -15,7 +15,7 @@ public class Animal {
     private Long id;
 
     @Override
-    public boolean equals(Object o) {
+    public final boolean equals(Object o) {
         if (this == o) return true;
         if (o == null) return false;
         if (getClass() != o.getClass()) return false;
