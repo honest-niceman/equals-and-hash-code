@@ -42,4 +42,15 @@ class EqualsAndHashCodeApplicationTests {
         Set<Dog> dogs = new HashSet<>();
         dogs.add(proxyDog);
     }
+
+    @Test
+    @Sql(scripts = "addTwoProxiesToHashBasedCollectionCausesInitializationTest/insert-dogs.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(scripts = "addTwoProxiesToHashBasedCollectionCausesInitializationTest/delete-dogs.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    public void addTwoProxiesToHashBasedCollectionCausesInitializationTest() {
+        Dog proxyDog1 = dogRepository.getReferenceById(1L);
+        Dog proxyDog2 = dogRepository.getReferenceById(2L);
+        Set<Dog> dogs = new HashSet<>();
+        dogs.add(proxyDog1);
+        dogs.add(proxyDog2);
+    }
 }
