@@ -1,0 +1,10 @@
+INSERT INTO students (id) VALUES (1);
+INSERT INTO students (id) VALUES (2);
+INSERT INTO students (id) VALUES (3);
+INSERT INTO students (id) VALUES (4);
+INSERT INTO students (id) VALUES (5);
+INSERT INTO students (id) VALUES (6);
+INSERT INTO students (id) VALUES (7);
+INSERT INTO students (id) VALUES (8);
+INSERT INTO students (id) VALUES (9);
+INSERT INTO students (id) VALUES (10);
